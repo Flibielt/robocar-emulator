@@ -396,7 +396,7 @@ public class CarWindow extends javax.swing.JFrame
         String wname = "UNK";
         try {
 
-            scan = new java.util.Scanner ( file );
+            scan = new java.util.Scanner ( file ).useLocale(java.util.Locale.US);
 
             while ( scan.hasNext() ) {
 
