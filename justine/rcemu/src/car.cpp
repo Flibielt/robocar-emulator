@@ -33,6 +33,9 @@
 #include <traffic.hpp>
 #include <boost/iterator/iterator_concepts.hpp>
 
+//Bug fix, for std::accumulate
+#include <numeric>
+
 justine::robocar::Car::Car (
   justine::robocar::Traffic & traffic,
   justine::robocar::CarType type ) :  traffic ( traffic ), m_type ( type )
