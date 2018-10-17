@@ -54,6 +54,9 @@
 #include <exception>
 #include <stdexcept>
 
+//Bug fix
+#include <google/protobuf/descriptor.h>
+
 namespace justine
 {
 namespace robocar
