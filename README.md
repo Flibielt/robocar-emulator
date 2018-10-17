@@ -93,7 +93,7 @@ make -C src
 sudo make -C src install
 
 #### A robotautó előkészítése:
-git clone git@github.com:Flibielt/robocar-emulator.git
+git clone https://github.com/Flibielt/robocar-emulator.git
 
 cd robocar-emulator-master/justine/rcemu/
 
