@@ -364,7 +364,7 @@ public class CarWindow extends javax.swing.JFrame {
         double lat = 0.0, lon = 0.0;
         try {
 
-            scan = new java.util.Scanner(file);
+            scan = new java.util.Scanner(file).useLocale(java.util.Locale.US);
 
             while (scan.hasNext()) {
 
