@@ -22,3 +22,98 @@ We already have a working prototype called [Justine](https://github.com/nbatfai/
 
 This is a new edition of Police edition of OOCWC which has been called "There is no own car"
 edition, for detailed information see https://github.com/nbatfai/SamuSmartCity 
+
+## Hiba javítások és használat:
+
+### Előkészületek:
+sudo apt-get install git
+
+sudo apt-get install autoconf
+
+sudo apt-get install libtool
+
+sudo apt-get install protobuf-compiler libprotobuf-dev
+
+sudo apt-get install libboost-all-dev
+
+sudo apt-get install flex
+
+sudo apt-get install libexpat1-dev
+
+sudo apt-get install zlib1g-dev
+
+sudo apt-get install libbz2-dev
+
+sudo apt-get install libsparsehash-dev
+
+sudo apt-get install libgdal-dev
+
+sudo apt-get install libgeos++-dev
+
+sudo apt-get install libproj-dev
+
+sudo apt-get install doxygen graphviz xmlstarlet
+
+sudo apt-get install cmake
+
+sudo apt-get install maven
+
+sudo apt-get install automake
+
+#### Home könyvtárban:
+mkdir libosmium
+
+cd libosmium
+
+Ide le kell tölteni a libosmiumot, mivel az új verzóval már nem működik a robotautó, ezért egy régbbi verziót kell használni. Ez a verzió valószínűleg jó lesz: https://github.com/osmcode/libosmium/tree/v2.10.3
+
+Tömörítsük ki a zip-et.
+
+cd libosmium-2.10.3
+
+cmake .
+
+make
+
+sudo cp -R ../libosmium/include/* /usr/local/include
+
+Ez sok időt és tárhelyet (~3GB) vesz igénybe.
+
+#### Home könyvtárból:
+mkdir OSM-binary
+
+cd OSM-binary
+
+git clone https://github.com/scrosby/OSM-binary.git
+
+cd OSM-binary/
+
+make -C src
+
+sudo make -C src install
+
+#### A robotautó előkészítése:
+git clone git@github.com:Flibielt/robocar-emulator.git
+
+cd robocar-emulator-master/justine/rcemu/
+
+autoreconf --install
+
+./configure
+
+Az src mappában lévő Makefile 385. sorát egészítsük -lrt kiegészítéssel. Így kell kinéznie:
+
+<code>SHM_OPEN_LIBS = -lrt</code>
+
+#### Futtatás:
+##### rcemu mappából:
+
+src/smartcity --osm=../debrecen.osm --city=Debrecen --shm=DebrecenSharedMemory --node2gps=../debrecen-lmap.txt
+
+src/traffic --port=10007 --shm=DebrecenSharedMemory
+
+##### rcwin mappából:
+
+mvn clean compile package site assembly:assembly
+
+java -jar target/site/justine-rcwin-0.0.16-jar-with-dependencies.jar ../debrecen-lmap.txt
