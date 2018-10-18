@@ -75,7 +75,7 @@ cmake .
 
 make
 
-sudo cp -R ../libosmium/include/* /usr/local/include
+sudo cp -R ../libosmium-2.10.3/include/* /usr/local/include
 
 Ez sok időt és tárhelyet (~3GB) vesz igénybe.
 
