@@ -95,15 +95,22 @@ sudo make -C src install
 #### A robotautó előkészítése:
 git clone https://github.com/Flibielt/robocar-emulator.git
 
-cd robocar-emulator-master/justine/rcemu/
+cd robocar-emulator/justine/rcemu/
 
 autoreconf --install
+
+A configure fájlban a boost_cv_lib_version=\`cat conftest.i\` sort át kell írni. Elsőnek le kell kérdezni a boost verzióját:
+`dpkg -s libboost-dev | grep 'Version'`. Nekem ezt adta eredményül: `Version: 1.65.1.0ubuntu1`.
+
+A configure fájlt az én esetemben így kellett átírni: `boost_cv_lib_version="1_65_1"`.
 
 ./configure
 
 Az src mappában lévő Makefile 385. sorát egészítsük -lrt kiegészítéssel. Így kell kinéznie:
 
 <code>SHM_OPEN_LIBS = -lrt</code>
+
+make
 
 #### Futtatás:
 ##### rcemu mappából:
